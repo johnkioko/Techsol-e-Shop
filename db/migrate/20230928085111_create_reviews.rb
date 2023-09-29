@@ -5,7 +5,6 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.references :product, null: false, foreign_key: true
       t.integer :rating
       t.text :comment
-      # t.datetime :created_at
 
       t.timestamps
     end
