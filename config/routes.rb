@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'payments/new'
+  get 'payments/create'
   get 'carts/show'
   get 'carts/add_to_cart'
   get 'carts/update_cart'
