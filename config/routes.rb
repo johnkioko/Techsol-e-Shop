@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'admin/index'
+  get 'admin/new'
+  get 'admin/edit'
+  get 'admin/show'
+  get 'admin/destroy'
   get 'shipments/show'
   get 'shipments/edit'
   get 'payments/new'
