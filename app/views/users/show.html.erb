@@ -1,2 +1,14 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+# <!-- app/views/users/show.html.erb -->
+<h1>Your Profile</h1>
+<p>Email: <%= @user.email %></p>
+
+<h2>Order History</h2>
+<ul>
+  <% @user.orders.each do |order| %>
+    <li>
+      Order Date: <%= order.created_at %><br>
+      Total: $<%= order.total %><br>
+      <!-- Display other order details as needed -->
+    </li>
+  <% end %>
+</ul>
