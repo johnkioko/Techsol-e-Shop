@@ -1,2 +1,14 @@
-<h1>Addresses#index</h1>
-<p>Find me in app/views/addresses/index.html.erb</p>
+# <!-- app/views/addresses/index.html.erb -->
+<h1>Your Shipping Addresses</h1>
+<ul>
+  <% @addresses.each do |address| %>
+    <li>
+      <strong><%= address.name %></strong><br>
+      <%= address.street_address %><br>
+      <%= address.city %>, <%= address.state %> <%= address.zip_code %><br>
+      <%= address.country %><br>
+      <%= link_to 'Edit', edit_address_path(address) %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Add New Address', new_address_path %>
