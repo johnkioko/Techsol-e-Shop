@@ -41,4 +41,7 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resources :addresses, only: [:new, :create, :edit, :update, :index]
+  resources :orders, only: [:index, :show, :new, :create]
+  get 'orders/checkout/:id', to: 'orders#checkout', as: 'checkout'
+  post 'orders/confirm/:id', to: 'orders#confirm', as: 'confirm_order'
 end
