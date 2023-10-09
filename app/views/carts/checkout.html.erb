@@ -1,2 +1,26 @@
-<h1>Carts#checkout</h1>
-<p>Find me in app/views/carts/checkout.html.erb</p>
+<h1>Checkout</h1>
+
+<% if @cart.cart_items.empty? %>
+  <p>Your cart is empty.</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.name %></td>
+          <td><%= cart_item.quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p>Total Price: $<%= @total_price %></p>
+  <%= link_to "Proceed to Checkout", checkout_confirm_cart_path, class: "btn btn-success" %>
+<% end %>
+
+<%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
