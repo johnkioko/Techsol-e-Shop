@@ -21,6 +21,16 @@ class Cart < ApplicationRecord
     end
   end
 
+  # Update the quantity of a product in the cart.
+  def update_quantity(product_id, quantity)
+    cart_item = cart_items.find_by(product_id: product_id)
+
+    if cart_item && quantity.to_i >= 0
+      cart_item.quantity = quantity.to_i
+      cart_item.save
+    end
+  end
+
   # Validations: Add validations as needed for your cart-related attributes.
   validates :user_id, :product_id, :quantity, presence: true
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
