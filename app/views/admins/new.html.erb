@@ -1,2 +1,8 @@
-<h1>Admin#new</h1>
-<p>Find me in app/views/admin/new.html.erb</p>
+<h1>New Product/Category</h1>
+
+<%= form_for @product_or_category, url: admin_create_path, method: :post do |f| %>
+  <!-- Form fields for creating a new product or category -->
+  <!-- Customize the form as needed -->
+
+  <%= f.submit "Create" %>
+<% end %>
