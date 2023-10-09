@@ -1,2 +1,6 @@
-<h1>Admin#destroy</h1>
-<p>Find me in app/views/admin/destroy.html.erb</p>
+<h1>Confirm Deletion</h1>
+
+<p>Are you sure you want to delete this resource?</p>
+
+<%= link_to "Cancel", admin_index_path %>
+<%= link_to "Confirm Delete", admin_destroy_path, method: :delete, data: { confirm: "Are you sure?" } %>

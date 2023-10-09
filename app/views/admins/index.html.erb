@@ -1,2 +1,22 @@
-<h1>Admin#index</h1>
-<p>Find me in app/views/admin/index.html.erb</p>
+<h1>Admin Panel</h1>
+
+<h2>Products</h2>
+<ul>
+  <% @products.each do |product| %>
+    <li><%= link_to product.name, admin_product_path(product) %></li>
+  <% end %>
+</ul>
+
+<h2>Categories</h2>
+<ul>
+  <% @categories.each do |category| %>
+    <li><%= link_to category.name, admin_category_path(category) %></li>
+  <% end %>
+</ul>
+
+<h2>Orders</h2>
+<ul>
+  <% @orders.each do |order| %>
+    <li><%= link_to "Order ##{order.id}", admin_order_path(order) %></li>
+  <% end %>
+</ul>

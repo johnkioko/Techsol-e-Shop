@@ -54,4 +54,10 @@ Rails.application.routes.draw do
 
   # Routes for ShipmentsController
   resources :shipments, only: [:show, :edit]
+
+  # Admin panel routes for managing products and categories
+  namespace :admin do
+    resources :products
+    resources :categories
+  end
 end
