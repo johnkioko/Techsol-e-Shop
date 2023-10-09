@@ -51,4 +51,7 @@ Rails.application.routes.draw do
   get 'cart/update_cart', to: 'carts#update_cart', as: 'update_cart'
   get 'cart/checkout', to: 'carts#checkout', as: 'checkout_cart'
   resources :payments, only: [:new, :create]
+
+  # Routes for ShipmentsController
+  resources :shipments, only: [:show, :edit]
 end

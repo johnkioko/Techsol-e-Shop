@@ -1,2 +1,6 @@
-<h1>Shipments#edit</h1>
-<p>Find me in app/views/shipments/edit.html.erb</p>
+<h1>Edit Shipment</h1>
+<%= form_for @shipment, url: shipment_path(@shipment), method: :patch do |f| %>
+  <!-- Shipment editing form fields go here -->
+  <!-- Allow admin users to modify shipment information, e.g., tracking info, delivery address, etc. -->
+  <%= f.submit "Update Shipment" %>
+<% end %>
