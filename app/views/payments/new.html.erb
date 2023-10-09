@@ -1,2 +1,8 @@
-<h1>Payments#new</h1>
-<p>Find me in app/views/payments/new.html.erb</p>
+<h1>Payment Details</h1>
+<%= form_for @order, url: payment_create_path do |f| %>
+  <!-- Payment form fields go here -->
+  <!-- You'll need to integrate with your payment service here -->
+  <!-- For example, credit card fields, billing address, etc. -->
+  <%= f.submit "Submit Payment" %>
+<% end %>
+
