@@ -50,4 +50,5 @@ Rails.application.routes.draw do
   get 'cart/add_to_cart/:product_id', to: 'carts#add_to_cart', as: 'add_to_cart'
   get 'cart/update_cart', to: 'carts#update_cart', as: 'update_cart'
   get 'cart/checkout', to: 'carts#checkout', as: 'checkout_cart'
+  resources :payments, only: [:new, :create]
 end
