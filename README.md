@@ -55,7 +55,8 @@ application up and running.
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li>Ruby on Rails</li>
+    <li>CSS</li>
   </ul>
 </details>
 
