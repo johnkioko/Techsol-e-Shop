@@ -183,7 +183,7 @@ Example:
 
 - GitHub: [John Mutisya](https://github.com/johnkioko)
 - Twitter: [@John_Web_Dev](https://twitter.com/John_Web_Dev)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- LinkedIn: [John Mutisya](https://linkedin.com/in/johnmutisya)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
