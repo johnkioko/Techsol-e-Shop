@@ -12,7 +12,18 @@ class UsersController < ApplicationController
 
   # Show user profile and order history (for logged-in users).
   def show
-    @user = current_user # Load the logged-in user
+    @user = current_user # Load the logged-in user 
     @orders = @user.orders # Retrieve user's orders
+  end
+
+  # POST /users
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      redirect_to @user, notice: 'User was successfully created.'
+    else
+      render :new
+    end
   end
 end
