@@ -1,31 +1,73 @@
 class ProductsController < ApplicationController
-  # Display a list of products.
-  def index
-    @products = Product.all
+    before_action :set_product, only: %i[ show edit update destroy ]
+  
+    # GET /products or /products.json
+    def index
+      @products = Product.all
+    end
+  
+    # GET /products/1 or /products/1.json
+    def show
+    end
+  
+    # GET /products/new
+    def new
+      @product = Product.new
+    end
+  
+    # GET /products/1/edit
+    def edit
+    end
+  
+    # POST /products or /products.json
+    def create
+      @product = Product.new(product_params)
+  
+      respond_to do |format|
+        if @product.save
+          format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+          format.json { render :show, status: :created, location: @product }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  
+    # PATCH/PUT /products/1 or /products/1.json
+    def update
+      respond_to do |format|
+        if @product.update(product_params)
+          format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+          format.json { render :show, status: :ok, location: @product }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  
+    # DELETE /products/1 or /products/1.json
+    def destroy
+      @product.destroy
+  
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    end
+  
+    private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_product
+        @product = Product.find(params[:id])
+      end
+  
+      # Only allow a list of trusted parameters through.
+      def product_params
+        params.require(:product).permit(:name, :description, :image_url, :price)
+      end
   end
 
-  # Show details of a specific product.
-  def show
-    @product = Product.find(params[:id])
-  end
+  
 
-  # Display a form for creating a new product (for admin users).
-  def new
-    @product = Product.new
-  end
-
-  # Display a form for editing an existing product (for admin users).
-  def edit
-    @product = Product.find(params[:id])
-  end
-
-  # Display search results for products.
-  def search
-    # Implement product search logic (if applicable)
-  end
-
-  # Display detailed search results.
-  def results
-    # Implement logic to show detailed search results (if applicable)
-  end
-end
