@@ -1,11 +1,14 @@
-# <!-- app/views/products/index.html.erb -->
-<h1>Product List</h1>
-<ul>
+<p style="color: green"><%= notice %></p>
+
+<h1>Products</h1>
+
+<div id="products">
   <% @products.each do |product| %>
-    <li>
-      <%= link_to product.name, product %><br>
-      Description: <%= product.description %><br>
-      Price: $<%= product.price %>
-    </li>
+    <%= render product %>
+    <p>
+      <%= link_to "Show this product", product %>
+    </p>
   <% end %>
-</ul>
+</div>
+
+<%= link_to "New product", new_product_path %>
