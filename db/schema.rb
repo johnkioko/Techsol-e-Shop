@@ -30,13 +30,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_053605) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "product_id", null: false
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_carts_on_product_id"
-    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -46,46 +42,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_053605) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "product_id", null: false
     t.integer "quantity"
     t.decimal "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.date "order_date"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "payments", force: :cascade do |t|
-    t.bigint "order_id", null: false
     t.string "payment_method"
     t.string "card_number"
     t.string "expiration_date"
     t.string "transaction_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.decimal "price"
-    t.integer "quantity_in_stock"
     t.string "image_url"
+    t.decimal "price", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "category_id", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "promotions", force: :cascade do |t|
@@ -98,49 +83,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_053605) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "product_id", null: false
     t.integer "rating"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_reviews_on_product_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "shipments", force: :cascade do |t|
-    t.bigint "order_id", null: false
     t.string "tracking_number"
     t.date "delivery_date"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_shipments_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
+    t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
-    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.index ["email"], name: "index_users_on_email"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "carts", "products"
-  add_foreign_key "carts", "users"
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "users"
-  add_foreign_key "payments", "orders"
-  add_foreign_key "products", "categories"
-  add_foreign_key "reviews", "products"
-  add_foreign_key "reviews", "users"
-  add_foreign_key "shipments", "orders"
 end
