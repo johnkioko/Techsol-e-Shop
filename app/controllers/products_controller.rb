@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    before_action :set_product, only: %i[ show edit update destroy ]
+    # before_action :set_product, only: %i[ show edit update destroy ]
   
     # GET /products or /products.json
     def index
@@ -35,17 +35,38 @@ class ProductsController < ApplicationController
     end
   
     # PATCH/PUT /products/1 or /products/1.json
+    # def update
+    #   @product = Product.find_by(id: params[:id]) # Use find_by to avoid raising an exception if not found
+    #   respond_to do |format|
+    #     if @product.update(product_params)
+    #       format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+    #       format.json { render :show, status: :ok, location: @product }
+    #     else
+    #       format.html { render :edit, status: :unprocessable_entity }
+    #       format.json { render json: @product.errors, status: :unprocessable_entity }
+    #     end
+    #   end
+    # end
+
     def update
+      @product = Product.find_by(id: params[:id]) # Use find_by to avoid raising an exception if not found
+    
       respond_to do |format|
-        if @product.update(product_params)
-          format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
-          format.json { render :show, status: :ok, location: @product }
+        if @product
+          if @product.update(product_params)
+            format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+            format.json { render :show, status: :ok, location: @product }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @product.errors, status: :unprocessable_entity }
+          end
         else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @product.errors, status: :unprocessable_entity }
+          format.html { redirect_to products_url, alert: "Product not found." }
+          format.json { render json: { error: "Product not found." }, status: :not_found }
         end
       end
     end
+    
   
     # DELETE /products/1 or /products/1.json
     def destroy
