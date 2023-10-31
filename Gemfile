@@ -5,9 +5,7 @@ ruby "3.1.3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"
-
-#gem for unit testing in rails 7
-gem 'test-unit-rails', '~> 7.0'
+gem 'rails-controller-testing'
 
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -72,8 +70,6 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem 'minitest-rails'
+
 end
