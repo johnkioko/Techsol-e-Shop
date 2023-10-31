@@ -3,15 +3,12 @@
 one:
   name: MyString
   description: MyText
-  price: 9.99
-  quantity_in_stock: 1
-  category: one
   image_url: MyString
+  price: 9.99
 
 two:
   name: MyString
   description: MyText
-  price: 9.99
-  quantity_in_stock: 1
-  category: two
   image_url: MyString
+  price: 9.99
+
