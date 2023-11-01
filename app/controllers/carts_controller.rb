@@ -1,52 +1,70 @@
 class CartsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_cart, only: %i[ show edit update destroy ]
 
-  # Display the contents of the shopping cart.
+  # GET /carts or /carts.json
+  def index
+    @carts = Cart.all
+  end
+
+  # GET /carts/1 or /carts/1.json
   def show
-    @cart = current_user.cart
   end
 
-  # Add a product to the cart.
-  def add_to_cart
-    product = Product.find(params[:product_id])
-    current_user.cart.add_product(product)
-
-    redirect_to cart_path, notice: "Product added to cart successfully."
+  # GET /carts/new
+  def new
+    @cart = Cart.new
   end
 
-  # Update cart quantities.
-  def update_cart
-    product_id = params[:product_id]
-    quantity = params[:quantity].to_i
-
-    current_user.cart.update_quantity(product_id, quantity)
-
-    redirect_to cart_path, notice: "Cart updated successfully."
+  # GET /carts/1/edit
+  def edit
   end
 
-  # Display cart contents and initiate the checkout process.
-  def checkout
-    @cart = current_user.cart
-    @total_price = @cart.calculate_total_price
+  # POST /carts or /carts.json
+  def create
+    @cart = Cart.new(cart_params)
 
-    # For simplicity, we assume a successful checkout without payment processing.
-    # In a real application, you would integrate with a payment gateway here.
+    respond_to do |format|
+      if @cart.save
+        format.html { redirect_to cart_url(@cart), notice: "Cart was successfully created." }
+        format.json { render :show, status: :created, location: @cart }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-    # Create an order record (simplified).
-    order = current_user.orders.create(total_price: @total_price)
+  # PATCH/PUT /carts/1 or /carts/1.json
+  def update
+    respond_to do |format|
+      if @cart.update(cart_params)
+        format.html { redirect_to cart_url(@cart), notice: "Cart was successfully updated." }
+        format.json { render :show, status: :ok, location: @cart }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-    # Add ordered products to the order (assuming cart items are products).
-    @cart.cart_items.each do |cart_item|
-      order.order_items.create(
-        product_id: cart_item.product.id,
-        quantity: cart_item.quantity,
-        subtotal: cart_item.product.price * cart_item.quantity
-      )
+  # DELETE /carts/1 or /carts/1.json
+  def destroy
+    @cart.destroy
+
+    respond_to do |format|
+      format.html { redirect_to carts_url, notice: "Cart was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_cart
+      @cart = Cart.find(params[:id])
     end
 
-    # Clear the user's cart.
-    @cart.cart_items.destroy_all
-
-    redirect_to order_path(order), notice: "Order placed successfully."
-  end
+    # Only allow a list of trusted parameters through.
+    def cart_params
+      params.fetch(:cart, {})
+    end
 end
