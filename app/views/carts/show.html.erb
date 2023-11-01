@@ -1,29 +1,10 @@
-# <!-- app/views/carts/show.html.erb -->
+<p style="color: green"><%= notice %></p>
 
-<h1>Your Shopping Cart</h1>
+<%= render @cart %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Subtotal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart.cart_items.each do |cart_item| %>
-      <tr>
-        <td><%= cart_item.product.name %></td>
-        <td><%= cart_item.quantity %></td>
-        <td><%= number_to_currency(cart_item.product.price) %></td>
-        <td><%= number_to_currency(cart_item.subtotal) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div>
+  <%= link_to "Edit this cart", edit_cart_path(@cart) %> |
+  <%= link_to "Back to carts", carts_path %>
 
-<p>Total Price: <%= number_to_currency(@total_price) %></p>
-
-<%= link_to "Checkout", checkout_cart_path, class: "button" %>
-
+  <%= button_to "Destroy this cart", @cart, method: :delete %>
+</div>
