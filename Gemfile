@@ -73,3 +73,5 @@ group :test do
   gem 'minitest-rails'
 
 end
+
+gem "tailwindcss-rails", "~> 2.0"
