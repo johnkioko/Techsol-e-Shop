@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'store/index'
   resources :carts
   devise_for :users
 
