@@ -12,3 +12,13 @@ two:
   image_url: MyString
   price: 9.99
 
+ruby:
+  name: Project management course
+  description:
+  oversight activities that insure the delivery of a high-quality system
+   on time and within budget including planning, budgeting, hiring and organizing
+    developers into teams.
+.
+  price: 49.50
+  image_url: project_management_book.jpg
+
