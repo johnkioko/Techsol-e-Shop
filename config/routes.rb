@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
-  root 'store/index', as: 'store_index'
+  resources :line_items
+  get'store/index'
   resources :carts
   devise_for :users
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "products#index"
+  root "store#index"
 
   resources :users, only: [:new, :create, :edit, :update, :show, :index]
   resources :products
+  resources :store
   resources :categories
   resources :addresses, only: [:new, :create, :edit, :update, :index]
   resources :orders, only: [:index, :show, :new, :create]
