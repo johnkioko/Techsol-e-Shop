@@ -24,5 +24,7 @@ class ProductTest < ActiveSupport::TestCase
     "#{image_url} must be invalid"
     end
     end
+
+    
     
 end

@@ -23,31 +23,14 @@ class LineItemsController < ApplicationController
   end
 
   # POST /line_items or /line_items.json
-  # def create
-  #   @cart = current_cart
-  #   product = Product.find(params[:product_id])
-  #   @line_item = @cart.line_items.build(:product => product)
-  #   respond_to do |format|
-  #   if @line_item.save
-  #     format.html { redirect_to(@line_item.cart,
-  #       :notice => 'Line item was successfully created.') }
-  #     format.xml { render :xml => @line_item,
-  #       :status => :created, :location => @line_item }
-  #   else
-  #     format.html { render :action => "new" }
-  #     format.xml { render :xml => @line_item.errors,
-  #       :status => :unprocessable_entity }
-  #   end
-  #   end
-  # end
 
   def create
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
+    @line_item = @cart.add_product(product)
+
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to cart_url(@line_item.cart),
-          notice: "Line item was successfully created." }
+        format.html  { redirect_to store_index_url }
         format.json { render :show,
           status: :created, location: @line_item }
       else
@@ -91,6 +74,6 @@ class LineItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
+      params.require(:line_item).permit(:product_id)
     end
 end

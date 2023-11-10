@@ -7,8 +7,8 @@ class ProductsController < ApplicationController
     end
   
     # GET /products/1 or /products/1.json
-    def show
-    end
+    # def show
+    # end
   
     # GET /products/new
     def new
@@ -35,19 +35,7 @@ class ProductsController < ApplicationController
     end
   
     # PATCH/PUT /products/1 or /products/1.json
-    # def update
-    #   @product = Product.find_by(id: params[:id]) # Use find_by to avoid raising an exception if not found
-    #   respond_to do |format|
-    #     if @product.update(product_params)
-    #       format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
-    #       format.json { render :show, status: :ok, location: @product }
-    #     else
-    #       format.html { render :edit, status: :unprocessable_entity }
-    #       format.json { render json: @product.errors, status: :unprocessable_entity }
-    #     end
-    #   end
-    # end
-
+ 
     def update
       @product = Product.find_by(id: params[:id]) # Use find_by to avoid raising an exception if not found
     

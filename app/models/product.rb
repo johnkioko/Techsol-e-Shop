@@ -16,12 +16,13 @@ class Product < ApplicationRecord
 private
  # ensure that there are no line items referencing this product
  def ensure_not_referenced_by_any_line_item
-  unless line_items.empty?
-    errors.add(:base, 'Line Items present')
-    throw :abort
+  if line_items.empty?
+  return true
+  else
+  errors.add(:base, 'Line Items present')
+  return false
   end
- end
-
+  end
 end
 
 # :quantity_in_stock,  :category_id,
