@@ -7,8 +7,9 @@ class ProductsController < ApplicationController
     end
   
     # GET /products/1 or /products/1.json
-    # def show
-    # end
+    def show
+      @product = Product.find(params[:id])
+    end
   
     # GET /products/new
     def new
@@ -17,6 +18,7 @@ class ProductsController < ApplicationController
   
     # GET /products/1/edit
     def edit
+      @product = Product.find(params[:id])
     end
   
     # POST /products or /products.json
