@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 <%= stylesheet_link_tag "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 <%= javascript_importmap_tags %>
 </head>
@@ -18,11 +21,8 @@
 
    <section class="flex">
         <nav class="bg-green-900 p-6">
-            <% if @cart and not @cart.line_items.empty? %>
-                <div id="cart" class="bg-white rounded p-2">
-                    <%= render @cart %>
-                </div>
-            <% end %>
+            <%= render partial: 'layouts/cart', locals: {cart: @cart } %>
+
             <ul class="text-gray-300 leading-8">
             <li><a href="/">Home</a></li>
             <li><a href="/Catalog">Catalog</a></li>

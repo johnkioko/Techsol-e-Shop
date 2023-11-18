@@ -1,0 +1,16 @@
+<ul>
+    <%= image_tag(@product.image_url,
+    class: 'object-contain w-40 h-48 shadow mr-6') %>
+    <div>
+        <h2 class="font-bold text-lg mb-3"><%= @product.name %></h2>
+        <p>
+            <%= sanitize(@product.description) %>
+        </p>
+        <div class="mt-3">
+            <%= number_to_currency(@product.price) %>
+        </div>
+    </div>
+        
+</ul>
+
+<%= link_to "edit product", edit_product_path %>
