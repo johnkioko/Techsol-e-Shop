@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_054417) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_29_175606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "street_address"
     t.string "city"
     t.string "state"
@@ -22,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_054417) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -119,7 +121,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_054417) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "line_items", "carts"
-  add_foreign_key "line_items", "orders"
-  add_foreign_key "line_items", "products"
+  add_foreign_key "addresses", "users"
+  add_foreign_key "carts", "products"
+  add_foreign_key "carts", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "shipments", "orders"
 end
